@@ -3,7 +3,7 @@ import { SpeedInsights } from '@vercel/speed-insights/vue'
 import { RouterLink, RouterView } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
-import { inject } from '@vercel/analytics'
+// import { inject } from '@vercel/analytics'
 const store = useMessageStore()
 const { message } = storeToRefs(store)
 // import HelloWorld from './components/EventCard.vue/index.js'
@@ -15,7 +15,7 @@ const pageSize = ref(3)
 </script>
 
 <template>
-  <inject mode="production"/>\
+  <!-- <inject mode="production"/> -->
   <div class="flex flex-col items-center w-full font-sans text-gray-700 antialiased">
     <header>
       <div id="flashMessage" class="animate-fade" v-if="message">
@@ -27,15 +27,17 @@ const pageSize = ref(3)
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
           :to="{ name: 'event-list-view' }">Event</RouterLink> |
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
-          :to="{ name: 'about' }">About</RouterLink>
+          :to="{ name: 'about' }">About</RouterLink> |
+          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
+          :to="{ name: 'add-event' }">New Event</RouterLink>
         </nav>
 
         <div class="page-size">
           <span>Page Size: </span>
-          <button class="mx-2" @click="pageSize = 1">1</button>
-          <button class="mx-2" @click="pageSize = 2">2</button>
-          <button class="mx-2" @click="pageSize = 3">3</button>
-          <button class="mx-2" @click="pageSize = 4">4</button>
+          <button class="mx-2 hover:cursor-pointer" @click="pageSize = 1">1</button>
+          <button class="mx-2 hover:cursor-pointer" @click="pageSize = 2">2</button>
+          <button class="mx-2 hover:cursor-pointer" @click="pageSize = 3">3</button>
+          <button class="mx-2 hover:cursor-pointer" @click="pageSize = 4">4</button>
         </div>
 
       </div>

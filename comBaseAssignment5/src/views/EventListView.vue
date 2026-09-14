@@ -49,8 +49,8 @@
 
   <h1>Event For Good</h1>
   <div class="flex flex-col items-center">
-    <EventCard v-for="event in events" :key="event.id" :event="event" />
-    <EventInfo v-for="event in events" :key="event.id" :event="event" />
+    <EventCard v-for="(event, index) in events" :key="event.id ?? index" :event="event" />
+    <EventInfo v-for="(event, index) in events" :key="event.id ?? index" :event="event" />
 
     <div class="flex w-[290px]">
       <RouterLink
