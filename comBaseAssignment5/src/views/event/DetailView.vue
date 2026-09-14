@@ -12,7 +12,7 @@
 
 <template>
   <div class="flex flex-col items-start mt-4 gap-4">
-    <p>{{ event.time }} on {{ event.date }} @ {{ event.location }}</p>
+    <p>{{ event.title }} @ {{ event.location }}</p>
     <p>{{ event.description }}</p>
   </div>
 </template>

@@ -1,4 +1,4 @@
-export interface Event {
+export interface Event{
     id: number | null
     category: string
     title: string
