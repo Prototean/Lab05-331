@@ -10,6 +10,11 @@ export interface Event{
     organizer: string
 }
 
+export interface Organizer{
+    id: number | null
+    name: string
+}
+
 export interface Student {
     id: number
     name: string
@@ -27,4 +32,8 @@ export interface MessageState {
 
 export interface EventState {
     event: Event | null
+}
+
+export interface OrganizerState {
+    organizer: Organizer | null
 }

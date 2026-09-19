@@ -29,7 +29,9 @@ const pageSize = ref(3)
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
           :to="{ name: 'about' }">About</RouterLink> |
           <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
-          :to="{ name: 'add-event' }">New Event</RouterLink>
+          :to="{ name: 'add-event' }">New Event</RouterLink> |
+          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500"
+          :to="{ name: 'add-organizer' }">New Organizer</RouterLink>
         </nav>
 
         <div class="page-size">

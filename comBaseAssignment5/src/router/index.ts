@@ -10,6 +10,8 @@ import NetworkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from 'nprogress'
 import EventService from '@/services/EventService'
 import AddEventView from '@/views/event/EventFormView.vue'
+import AddOrganizer from '@/views/OrganizerAddView.vue'
+import OrganizerDetailView from '@/views/organizer/DetailView.vue'
 import { useEventStore } from '@/stores/event'
 
 
@@ -73,6 +75,18 @@ const router = createRouter({
       path:'/add-event',
       name: 'add-event',
       component: AddEventView
+    },
+    {
+      path:'/add-organizer',
+      name:'add-organizer',
+      component:AddOrganizer
+    },
+    {
+      path: '/organizer/:id',
+      name: 'organizer-detail-view',
+      component: OrganizerDetailView,
+      props: true
+      // TODO: beforeEnter -> OrganizerService.getOrganizer(id) -> organizerStore.setOrganizer(response.data)
     },
     {
       path: '/404/:resource',
