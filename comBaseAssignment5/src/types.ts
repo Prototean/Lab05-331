@@ -10,6 +10,11 @@ export interface Event{
     organizer: string
 }
 
+export interface Organizer{
+    id: number | null
+    name: string
+}
+
 export interface Student {
     id: number
     name: string
