@@ -7,15 +7,15 @@ import { useMessageStore } from '@/stores/message';
 
 const organizer = ref<OrganizerType>({
   id: null,
-  name: ''
+  organizer: ''
 })
 const router = useRouter()
 const store = useMessageStore()
 function saveOrganizer() {
     OrganizerService.saveOrganizer(organizer.value)
     .then((response) => {
-        router.push({ name: 'event-detail-view', params: { id: response.data.id}}) 
-        store.updateMessage('You are successfully add a new organizer name is  ' + response.data.name)
+        router.push({ name: 'organizer-detail-view', params: { id: response.data.id}})
+        store.updateMessage('You are successfully add a new organizer name is  ' + response.data.organizer)
           setTimeout(() => {
             store.resetMessage()
           }, 3000)
@@ -34,9 +34,9 @@ function saveOrganizer() {
       <h3>Name of your Organizer</h3>
       <label class="block text-gray-500 font-bold">Name</label>
       <input
-        v-model="organizer.name"
+        v-model="organizer.organizer"
         type="text"
-        placeholder="Category"
+        placeholder="Name"
         class="h-13 w-full px-2.5 text-xl border border-gray-400 focus:border-emerald-500 focus : outline-none mb-6"
       />
       <button
