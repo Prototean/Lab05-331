@@ -11,7 +11,7 @@ export interface Event{
 }
 
 export interface Organizer{
-    id: number | null
+    id: number
     name: string
 }
 
