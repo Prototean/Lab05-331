@@ -14,11 +14,11 @@ const store = useMessageStore()
 function saveOrganizer() {
     OrganizerService.saveOrganizer(organizer.value)
     .then((response) => {
-        router.push({ name: 'organizer-detail-view', params: { id: response.data.id}})
         store.updateMessage('You are successfully add a new organizer name is  ' + response.data.organizer)
           setTimeout(() => {
             store.resetMessage()
           }, 3000)
+        router.push({ name: 'organizer-view', params: { id: response.data.id}})
       })
     .catch(() => {
         router.push({ name: 'network-error-view'})

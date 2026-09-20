@@ -9,10 +9,13 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from 'nprogress'
 import EventService from '@/services/EventService'
+import OrganizerService from '@/services/OrganizerService'
 import AddEventView from '@/views/event/EventFormView.vue'
-import AddOrganizer from '@/views/OrganizerAddView.vue'
-import OrganizerDetailView from '@/views/organizer/DetailView.vue'
+import AddOrganizer from '@/views/organizer/OrganizerAddView.vue'
+import OrganizerDetailView from '@/views/organizer/OrganDetailView.vue'
+import OrganizerLayoutView from '@/views/organizer/LayoutView.vue'
 import { useEventStore } from '@/stores/event'
+import { useOrganizerStore } from '@/stores/organizer'
 
 
 const router = createRouter({
@@ -77,15 +80,42 @@ const router = createRouter({
       component: AddEventView
     },
     {
-      path:'/add-organizer',
+      path:'/add-organizers',
       name:'add-organizer',
       component:AddOrganizer
     },
     {
-      path: '/organizer/:id',
-      name: 'organizer-detail-view',
-      component: OrganizerDetailView,
-    },
+      path: '/orgainzers/:id',
+      name: 'organizer-layout-view',
+      component: OrganizerLayoutView,
+      props: true,
+      beforeEnter: (to) => {
+        const id = parseInt(to.params.id as string)
+        const organizerStore = useOrganizerStore()
+        return OrganizerService.getOrganizer(id)
+        .then((response) => {
+          organizerStore.setOrganizer(response.data)
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 404) {
+            return {
+              name: '404-resource-view',
+              params: { resource: 'organizer' }
+            }
+          } else{
+            return { name: 'network-error-view' }
+          }
+        })
+      },
+      children: [
+        {
+          path: '',
+          name: 'organizer-view',
+          component: OrganizerDetailView
+        }
+      ]
+    }
+        ,
     {
       path: '/404/:resource',
       name: '404-resource-view',
