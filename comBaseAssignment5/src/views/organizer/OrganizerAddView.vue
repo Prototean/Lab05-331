@@ -7,7 +7,7 @@ import { useMessageStore } from '@/stores/message';
 
 const organizer = ref<OrganizerType>({
   id: null,
-  organizer: ''
+  name: ''
 })
 const router = useRouter()
 const store = useMessageStore()
@@ -34,7 +34,7 @@ function saveOrganizer() {
       <h3>Name of your Organizer</h3>
       <label class="block text-gray-500 font-bold">Name</label>
       <input
-        v-model="organizer.organizer"
+        v-model="organizer.name"
         type="text"
         placeholder="Name"
         class="h-13 w-full px-2.5 text-xl border border-gray-400 focus:border-emerald-500 focus : outline-none mb-6"
