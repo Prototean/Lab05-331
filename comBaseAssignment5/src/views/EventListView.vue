@@ -4,10 +4,11 @@
   import type { Event } from '@/types'
   import { ref, onMounted, computed, watchEffect } from 'vue'
   import EventService from '@/services/EventService'
+  import BaseInput from '@/components/BaseInput.vue'
   // import '../assets/main.css'
-  // import { useRouter } from 'vue-router'
+   import { useRouter } from 'vue-router'
 
-  // const router = useRouter()
+   const router = useRouter()
 
   const events = ref<Event[] | null>(null)
 
@@ -43,15 +44,39 @@
         })
     })
   })
+const keyword = ref('')
+function updateKeyword() {
+  let queryFunction;
+  if (keyword.value === ''){
+    queryFunction = EventService.getEvents(3, page.value)
+  } else{
+    queryFunction = EventService.getEventByKeyword(keyword.value, 3,page.value)
+  }
+  queryFunction.then((response) => {
+    events.value = response.data
+    console.log('event',events.value)
+    totalEvents.value = response.headers['x-total-count']
+    console.log('totalEvent',totalEvents.value)
+  }).catch(() =>{
+    router.push({ name: 'network-error-view'})
+  })
+}
 </script>
 
 <template>
 
   <h1>Event For Good</h1>
-  <div class="flex flex-col items-center">
+  <main class="flex flex-col items-center">
+    <div class="w-64">
+          <BaseInput
+          v-model="keyword"
+          label="Search..."
+          @input="updateKeyword"
+          class="w-full"
+          />
+    </div>
     <EventCard v-for="(event, index) in events" :key="event.id ?? index" :event="event" />
     <EventInfo v-for="(event, index) in events" :key="event.id ?? index" :event="event" />
-
     <div class="flex w-[290px]">
       <RouterLink
         class="flex-1 text-left no-underline text-[#2c3e50]"
@@ -67,7 +92,7 @@
         v-if="hasNextPage"
         > | Next Page | &#62;</RouterLink>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped>
