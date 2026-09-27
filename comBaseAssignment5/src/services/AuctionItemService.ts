@@ -12,5 +12,13 @@ const apiClient = axios.create({
 export default {
   getAuctionItems() {
     return apiClient.get('/auctionItems')
+  },
+  getAuctionItemsBySearch(description: string, type: string) {
+    return apiClient.get(
+      '/auctionItems?description=' +
+        encodeURIComponent(description) +
+        '&type=' +
+        encodeURIComponent(type)
+    )
   }
 }
