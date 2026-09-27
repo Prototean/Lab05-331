@@ -10,6 +10,7 @@ import NetworkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from 'nprogress'
 import EventService from '@/services/EventService'
 import AddEventView from '@/views/event/EventFormView.vue'
+import AuctionItemListView from '@/views/AuctionItemListView.vue'
 
 
 import { useEventStore } from '@/stores/event'
@@ -71,6 +72,11 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: AboutView
+    },
+    {
+      path: '/auction-items',
+      name: 'auction-item-list-view',
+      component: AuctionItemListView
     },
     {
       path:'/add-event',
