@@ -10,6 +10,10 @@ interface UploadMedia {
 const modelVaule = defineModel<string[]>({
     default: () => [],
 })
+
+const props = withDefaults(defineProps<{ max?: number }>(), {
+    max: undefined,
+})
 const convertStringToMedia = (str: string[]): UploadMedia[] => {
     return str.map((element) => {
         return {
@@ -32,5 +36,5 @@ const onChange = (files: UploadMedia[]): void => {
 }
 </script>
 <template>
-    <Uploader :server="uploadeUrl" @change="onChange" :media="media"></Uploader>
+    <Uploader :server="uploadeUrl" @change="onChange" :media="media" :max="props.max"></Uploader>
 </template>

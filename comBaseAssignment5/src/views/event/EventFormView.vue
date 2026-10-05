@@ -18,7 +18,7 @@ const event = ref<EventType>({
   date: '',
   time: '',
   petsAllowed: false,
-  organizer: { id: 0 , name: ' ' },
+  organizer: { id: 0 , name: ' ', images: [] },
   images: []
 })
 const router = useRouter()

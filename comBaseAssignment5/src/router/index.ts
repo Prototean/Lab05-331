@@ -11,9 +11,14 @@ import nProgress from 'nprogress'
 import EventService from '@/services/EventService'
 import AddEventView from '@/views/event/EventFormView.vue'
 import AuctionItemListView from '@/views/AuctionItemListView.vue'
+import AddOrganizerView from '@/views/OrganizerFormView.vue'
+import OrganizerListView from '@/views/OrganizerListView.vue'
+import OrganizerDetailView from '@/views/OrganizerDetailView.vue'
+import OrganizerService from '@/services/OrganizerService'
 
 
 import { useEventStore } from '@/stores/event'
+import { useOrganizerStore } from '@/stores/organizer'
 
 
 
@@ -83,7 +88,43 @@ const router = createRouter({
       name: 'add-event',
       component: AddEventView
     },
-    
+    {
+      path: '/organizer',
+      name: 'organizer',
+      component: OrganizerListView,
+      props: (route) => ({ page: parseInt(route.query.page?.toString() || '1')})
+    },
+    {
+      path: '/add-organizer',
+      name: 'add-organizer',
+      component: AddOrganizerView
+    },
+    {
+      path: '/organizer/:id',
+      name: 'organizer-detail-view',
+      component: OrganizerDetailView,
+      props: true,
+      beforeEnter: (to) => {
+        const id = parseInt(to.params.id as string)
+        const organizerStore = useOrganizerStore()
+        return OrganizerService.getOrganizer(id)
+        .then((response) => {
+          // need to setup the data for the organizer
+          organizerStore.setOrganizer(response.data)
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 404) {
+            return {
+              name: '404-resource-view',
+              params: { resource: 'organizer' }
+            }
+          } else{
+            return { name: 'network-error-view' }
+          }
+        })
+      }
+    },
+
 
     {
       path: '/404/:resource',
