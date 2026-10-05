@@ -11,6 +11,7 @@ const modelVaule = defineModel<string[]>({
     default: () => [],
 })
 
+
 const props = withDefaults(defineProps<{ max?: number }>(), {
     max: undefined,
 })

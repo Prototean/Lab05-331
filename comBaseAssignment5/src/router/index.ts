@@ -109,7 +109,7 @@ const router = createRouter({
         const organizerStore = useOrganizerStore()
         return OrganizerService.getOrganizer(id)
         .then((response) => {
-          // need to setup the data for the organizer
+          
           organizerStore.setOrganizer(response.data)
         })
         .catch((error) => {

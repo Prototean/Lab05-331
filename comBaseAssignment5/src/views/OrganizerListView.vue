@@ -9,8 +9,6 @@ const router = useRouter()
 
 const organizers = ref<Organizer[] | null>(null)
 const totalOrganizers = ref<number>(0)
-// the image of an organizer is a supabase storage key, the presigned
-// urls are kept here by organizer id
 const imageUrls = ref<Record<number, string>>({})
 
 const props = defineProps({
