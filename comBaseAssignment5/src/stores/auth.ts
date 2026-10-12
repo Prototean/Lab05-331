@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+﻿import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { AxiosInstance } from 'axios'
 import type { Organizer } from '@/types'
@@ -18,6 +18,12 @@ export const useAuthStore = defineStore('auth', {
   getters: {
     currentUserName(): string{
         return this.user?.name ||''
+    },
+  isAdmin(): boolean {
+    return this.user?.roles?.includes('ROLE_ADMIN') || false
+  },
+    authorizationHeader() : string {
+        return `Bearer ${this.token}`
     }
   },
   actions: {

@@ -1,4 +1,4 @@
-export interface Event{
+﻿export interface Event{
     id: number | null
     category: string
     title: string
@@ -15,6 +15,7 @@ export interface Organizer{
     id: number
     name: string
     images: string[]
+    roles?: string[]
 }
 
 export interface Student {
