@@ -15,7 +15,7 @@ import AddOrganizerView from '@/views/OrganizerFormView.vue'
 import OrganizerListView from '@/views/OrganizerListView.vue'
 import OrganizerDetailView from '@/views/OrganizerDetailView.vue'
 import OrganizerService from '@/services/OrganizerService'
-import LoginView from '@/views/Login.vue'
+import LoginView from '@/views/LoginView.vue'
 
 
 import { useEventStore } from '@/stores/event'
