@@ -19,7 +19,7 @@ import { ref } from 'vue'
 const pageSize = ref(3)
 
 function logout() {
-  authStore.logout()
+  authStore.Logout()
   router.push({ name: 'login'})
 }
 
