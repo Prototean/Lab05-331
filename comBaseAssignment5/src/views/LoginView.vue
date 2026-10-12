@@ -6,6 +6,8 @@ import { useAuthStore } from '@/stores/auth';
 const  authStore = useAuthStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
+import { useMessageStore } from '@/stores/message';
+const messageStore = useMessageStore()
 
 
 const validationSchema = yup.object ({
@@ -26,9 +28,12 @@ const onSubmit = handleSubmit((values)=> {
         .then(() => {
             router.push({ name: 'event-list-view' })
         }).catch((err) => {
-            console.log('error',err)
+            messageStore.updateMessage('could not login')
+            setTimeout(() => {
+                messageStore.resetMessage()
+            })
         })
-})
+    })
 </script>
 <template>
     <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
