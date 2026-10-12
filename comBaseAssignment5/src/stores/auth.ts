@@ -22,6 +22,8 @@ export const useAuthStore = defineStore('auth', {
         })
         .then((response) => {
           this.token = response.data.access_token
+            localStorage.setItem('access_token',this.token as string)
+            // (removed - the request interceptor adds the Authoriztion header on apiClient)
           return response
         })
     },
