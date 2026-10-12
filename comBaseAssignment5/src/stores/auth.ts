@@ -43,6 +43,15 @@ export const useAuthStore = defineStore('auth', {
           return response
         })
     },
+    register(username: string, firstname: string, lastname: string, email: string, password: string) {
+      return apiClient.post('/api/v1/auth/register', {
+        username: username,
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+      })
+    },
     Logout(){
         console.log('logout')
         this.token = null
